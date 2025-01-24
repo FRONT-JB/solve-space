@@ -9,7 +9,7 @@ export default function Editor({
   onMount: (editor: Monaco) => void;
 }) {
   return (
-    <div className="h-full relative group rounded-xl overflow-hidden ring-1 ring-white/[0.05]">
+    <div className="h-full relative bg-foreground rounded-xl overflow-hidden ring-1 ring-white/[0.05]">
       <MonacoEditor
         language={LANGUAGE_CONFIG.javascript.monacoLanguage}
         theme="github-dark"
