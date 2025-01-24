@@ -1,10 +1,12 @@
-import { Editor as MonacoEditor } from "@monaco-editor/react";
+import { Monaco, Editor as MonacoEditor } from "@monaco-editor/react";
 import { defineMonacoThemes, LANGUAGE_CONFIG } from "../constants";
 
 export default function Editor({
   onChange,
+  onMount,
 }: {
   onChange: (value: string | undefined) => void;
+  onMount: (editor: Monaco) => void;
 }) {
   return (
     <div className="flex-1 relative group rounded-xl overflow-hidden ring-1 ring-white/[0.05]">
@@ -14,6 +16,7 @@ export default function Editor({
         defaultValue={LANGUAGE_CONFIG.javascript.defaultCode}
         beforeMount={defineMonacoThemes}
         onChange={onChange}
+        onMount={onMount}
         options={{
           minimap: { enabled: false },
           fontSize: 14,

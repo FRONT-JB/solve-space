@@ -1,15 +1,18 @@
 "use client";
 
-import { useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import Editor from "./ui/Editor";
 import Output from "./ui/Output";
 import { LANGUAGE_CONFIG } from "./constants";
+import { Monaco } from "@monaco-editor/react";
 
 export default function Home() {
   const [value, setValue] = useState("");
   const [isRunning, setIsRunning] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [output, setOutput] = useState("");
+  const [editor, setEditor] = useState<Monaco | null>(null);
+
   const [executionResult, setExecutionResult] = useState<{
     code: string;
     output: string;
@@ -26,7 +29,7 @@ export default function Home() {
     setValue(value);
   };
 
-  const runCode = async () => {
+  const runCode = useCallback(async () => {
     if (!value) {
       setError("Please enter some code");
       return;
@@ -102,16 +105,42 @@ export default function Home() {
     } finally {
       setIsRunning(false);
     }
+  }, [value]);
+
+  const handleEditorMount = (editor: Monaco) => {
+    setEditor(editor);
   };
+
+  useEffect(() => {
+    if (!editor && !LANGUAGE_CONFIG["javascript"].defaultCode) return;
+
+    editor?.setValue(LANGUAGE_CONFIG["javascript"].defaultCode);
+  }, [editor]);
+
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+
+    const handleKeyPress = (e: KeyboardEvent) => {
+      if (e.ctrlKey && e.key === "Enter") {
+        runCode();
+      }
+    };
+
+    window.addEventListener("keypress", handleKeyPress);
+
+    return () => {
+      window.removeEventListener("keypress", handleKeyPress);
+    };
+  }, [runCode]);
 
   return (
     <div className="h-full max-w-[1420px] mx-auto p-4">
-      <button type="button" onClick={runCode}>
-        Run
+      <button className="font-mono" type="button" onClick={runCode}>
+        ⌃ + Enter
       </button>
 
       <div className="flex flex-col gap-4 h-[calc(100%-36px)]">
-        <Editor onChange={handleChange} />
+        <Editor onChange={handleChange} onMount={handleEditorMount} />
 
         <Output isRunning={isRunning} output={output} error={error} />
       </div>
