@@ -139,20 +139,20 @@ export default function Home() {
   }, [runCode]);
 
   return (
-    <div className="h-full max-w-[1420px] mx-auto p-4 ">
+    <div className="h-full max-w-[1420px] mx-auto p-4 bg-zinc-200 ">
       <button className="font-mono" type="button" onClick={runCode}>
         ⌃ + Enter
       </button>
 
       <div className="flex flex-col gap-4 h-[calc(100%-24px)] ">
         <ResizablePanelGroup direction="vertical">
-          <ResizablePanel>
+          <ResizablePanel defaultSize={60}>
             <Editor onChange={handleChange} onMount={handleEditorMount} />
           </ResizablePanel>
 
           <ResizableHandle withHandle />
 
-          <ResizablePanel>
+          <ResizablePanel defaultSize={40}>
             <Output isRunning={isRunning} output={output} error={error} />
           </ResizablePanel>
         </ResizablePanelGroup>
