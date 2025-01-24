@@ -18,15 +18,15 @@ export default function Home() {
   const [output, setOutput] = useState("");
   const [editor, setEditor] = useState<Monaco | null>(null);
 
-  const [executionResult, setExecutionResult] = useState<{
-    code: string;
-    output: string;
-    error: string | null;
-  }>({
-    code: "",
-    output: "",
-    error: null,
-  });
+  // const [executionResult, setExecutionResult] = useState<{
+  //   code: string;
+  //   output: string;
+  //   error: string | null;
+  // }>({
+  //   code: "",
+  //   output: "",
+  //   error: null,
+  // });
 
   const handleChange = (value: string | undefined) => {
     if (!value) return;
@@ -70,22 +70,24 @@ export default function Home() {
       if (data.compile && data.compile.code !== 0) {
         const error = data.compile.stderr || data.compile.output;
         setError(error);
-        setExecutionResult({
-          code: value,
-          output: "",
-          error,
-        });
+        // TODO: 백엔드 로직 추가 후 로직 구현
+        // setExecutionResult({
+        //   code: value,
+        //   output: "",
+        //   error,
+        // });
         return;
       }
 
       if (data.run && data.run.code !== 0) {
         const error = data.run.stderr || data.run.output;
         setError(error);
-        setExecutionResult({
-          code: value,
-          output: "",
-          error,
-        });
+        // TODO: 백엔드 로직 추가 후 로직 구현
+        // setExecutionResult({
+        //   code: value,
+        //   output: "",
+        //   error,
+        // });
         return;
       }
 
@@ -94,19 +96,21 @@ export default function Home() {
 
       setOutput(output.trim());
       setError(null);
-      setExecutionResult({
-        code: value,
-        output: output.trim(),
-        error: null,
-      });
+      // TODO: 백엔드 로직 추가 후 로직 구현
+      // setExecutionResult({
+      //   code: value,
+      //   output: output.trim(),
+      //   error: null,
+      // });
     } catch (error) {
       console.log("Error running code:", error);
       setError("Error running code");
-      setExecutionResult({
-        code: value,
-        output: "",
-        error: "Error running code",
-      });
+      // TODO: 백엔드 로직 추가 후 로직 구현
+      // setExecutionResult({
+      //   code: value,
+      //   output: "",
+      //   error: "Error running code",
+      // });
     } finally {
       setIsRunning(false);
     }
