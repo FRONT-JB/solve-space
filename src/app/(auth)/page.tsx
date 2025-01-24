@@ -5,6 +5,11 @@ import Editor from "./ui/Editor";
 import Output from "./ui/Output";
 import { LANGUAGE_CONFIG } from "./constants";
 import { Monaco } from "@monaco-editor/react";
+import {
+  ResizableHandle,
+  ResizablePanel,
+  ResizablePanelGroup,
+} from "@/components/ui/resizable";
 
 export default function Home() {
   const [value, setValue] = useState("");
@@ -134,15 +139,23 @@ export default function Home() {
   }, [runCode]);
 
   return (
-    <div className="h-full max-w-[1420px] mx-auto p-4">
+    <div className="h-full max-w-[1420px] mx-auto p-4 ">
       <button className="font-mono" type="button" onClick={runCode}>
         ⌃ + Enter
       </button>
 
-      <div className="flex flex-col gap-4 h-[calc(100%-36px)]">
-        <Editor onChange={handleChange} onMount={handleEditorMount} />
+      <div className="flex flex-col gap-4 h-[calc(100%-24px)] ">
+        <ResizablePanelGroup direction="vertical">
+          <ResizablePanel>
+            <Editor onChange={handleChange} onMount={handleEditorMount} />
+          </ResizablePanel>
 
-        <Output isRunning={isRunning} output={output} error={error} />
+          <ResizableHandle withHandle />
+
+          <ResizablePanel>
+            <Output isRunning={isRunning} output={output} error={error} />
+          </ResizablePanel>
+        </ResizablePanelGroup>
       </div>
     </div>
   );

@@ -10,8 +10,8 @@ interface Props {
 export default function Output({ isRunning, output, error }: Props) {
   return (
     <div
-      className="flex-1 relative bg-[#1e1e2e]/50 backdrop-blur-sm border border-[#313244] 
-        rounded-xl p-4 h-[600px] overflow-auto font-mono text-sm"
+      className="h-full relative bg-foreground backdrop-blur-sm
+        rounded-xl p-4 overflow-auto font-mono text-sm"
     >
       {isRunning ? (
         <OutputSkeleton />
