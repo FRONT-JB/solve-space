@@ -10,7 +10,7 @@ interface Props {
 export default function Output({ isRunning, output, error }: Props) {
   return (
     <div
-      className="h-full relative bg-foreground backdrop-blur-sm
+      className="h-full relative bg-black/30 backdrop-blur-sm
         rounded-xl p-4 overflow-auto font-mono text-sm"
     >
       {isRunning ? (

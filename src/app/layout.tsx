@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
 import { ThemeProvider } from "@/providers";
+import ThemeToggle from "./(auth)/ui/ThemeToggle";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -27,7 +28,7 @@ export default function RootLayout({
   return (
     <html lang="ko" className="h-full" suppressHydrationWarning>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased h-full bg-foreground/95`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased h-full`}
         suppressHydrationWarning
       >
         <ThemeProvider
@@ -37,6 +38,8 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           <div className="h-full max-w-[1420px] mx-auto p-4">{children}</div>
+
+          <ThemeToggle />
         </ThemeProvider>
       </body>
     </html>
