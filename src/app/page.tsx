@@ -1,12 +1,11 @@
 import { Button } from "@/components/ui/button";
 import { signInWithGithub, signOut } from "@/app/lib";
 import { createSupabaseServer } from "@/app/lib/supabase/server";
+
 export default async function Home() {
   const supabase = await createSupabaseServer();
 
   const session = await supabase.auth.getUser();
-
-  console.log(session);
 
   return (
     <div>

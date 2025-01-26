@@ -20,9 +20,11 @@ export async function GET(request: NextRequest) {
 
       if (isLocalEnv) {
         // 로컬 환경에서는 현재 페이지로 이동한다.
+        console.log(`@@@@@@@@@ ${origin}${next}`);
         return NextResponse.redirect(`${origin}${next}`);
       } else if (forwardedHost) {
         // 커스텀 도메인이라 프록시된 호스트를 사용한다.
+        console.log(`@@@@@@@@@ https://${forwardedHost}${next}`);
         return NextResponse.redirect(`https://${forwardedHost}${next}`);
       } else {
         return NextResponse.redirect(`${origin}${next}`);
