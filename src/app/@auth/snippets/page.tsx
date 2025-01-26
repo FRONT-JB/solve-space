@@ -11,7 +11,7 @@ import { useCallback, useEffect, useState } from "react";
 import { Monaco } from "@monaco-editor/react";
 import { LANGUAGE_CONFIG } from "./constants";
 
-export default function EditorPage() {
+export default function SnippetsPage() {
   const [value, setValue] = useState("");
   const [isRunning, setIsRunning] = useState(false);
   const [error, setError] = useState<string | null>(null);

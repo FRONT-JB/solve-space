@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
-import "./globals.css";
 import { ThemeProvider } from "@/providers";
-import ThemeToggle from "./(auth)/ui/ThemeToggle";
+import ThemeToggle from "./@auth/ui/ThemeToggle";
+import "./globals.css";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -22,8 +22,12 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
+  auth,
+  public: publicPage,
 }: Readonly<{
   children: React.ReactNode;
+  auth: React.ReactNode;
+  public: React.ReactNode;
 }>) {
   return (
     <html lang="ko" className="h-full" suppressHydrationWarning>
@@ -37,7 +41,11 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <div className="h-full max-w-[1420px] mx-auto p-4">{children}</div>
+          <div className="h-full max-w-[1420px] mx-auto p-4">
+            {children}
+            {auth}
+            {publicPage}
+          </div>
 
           <ThemeToggle />
         </ThemeProvider>

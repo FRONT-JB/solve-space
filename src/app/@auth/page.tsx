@@ -5,10 +5,13 @@ import { Input } from "@/components/ui/input";
 import { AnimatePresence, motion } from "framer-motion";
 import { BookOpen, Clock, Search, User } from "lucide-react";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 
 export default function Home() {
+  const { push } = useRouter();
+
   return (
-    <div className="flex flex-col gap-5 md:gap-10 h-full py-4 md:py-10">
+    <div className="flex flex-col gap-5 md:gap-6 h-full py-4 md:py-10">
       <div className="flex flex-col items-center justify-center gap-4">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -67,6 +70,7 @@ export default function Home() {
                 className="relative h-full dark:bg-[#1e1e2e]/80 backdrop-blur-3xl rounded-xl 
                 border dark:border-[#313244]/50 dark:hover:border-[#313244] 
                 transition-all duration-300 overflow-hidden cursor-pointer"
+                onClick={() => push(`/snippets/${snippet}`)}
               >
                 <div className="p-6">
                   {/* Header */}
