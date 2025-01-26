@@ -136,7 +136,21 @@ export default function Home() {
                       <div className="absolute inset-0 bg-gradient-to-br from-blue-500/50 to-purple-500/30 dark:from-blue-500/15 dark:to-purple-500/5 rounded-lg opacity-0 group-hover/code:opacity-100 transition-all" />
 
                       <pre className="relative dark:bg-black/30 bg-slate-800/70 rounded-lg p-4 overflow-hidden text-sm text-gray-100 dark:text-gray-300 font-mono line-clamp-3">
-                        코드
+                        {`// JavaScript Playground
+const numbers = [1, 2, 3, 4, 5];
+
+// Map numbers to their squares
+const squares = numbers.map(n => n * n);
+console.log('Original numbers:', numbers);
+console.log('Squared numbers:', squares);
+
+// Filter for even numbers
+const evenNumbers = numbers.filter(n => n % 2 === 0);
+console.log('Even numbers:', evenNumbers);
+
+// Calculate sum using reduce
+const sum = numbers.reduce((acc, curr) => acc + curr, 0);
+console.log('Sum of numbers:', sum);`}
                       </pre>
                     </div>
                   </div>
