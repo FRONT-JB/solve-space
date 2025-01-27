@@ -1,9 +1,10 @@
 import { Button } from "@/components/ui/button";
 import { signInWithGithub, signOut } from "@/app/lib";
-import { createSupabaseServer } from "@/app/lib/supabase/server";
+import { supabaseServer } from "@/app/lib/supabase/server";
+import Link from "next/link";
 
 export default async function Home() {
-  const supabase = await createSupabaseServer();
+  const supabase = await supabaseServer();
 
   const session = await supabase.auth.getUser();
 
@@ -14,6 +15,8 @@ export default async function Home() {
       {!session.data.user && (
         <Button onClick={signInWithGithub}>Sign in with Github</Button>
       )}
+
+      <Link href="/snippets">Snippets</Link>
     </div>
   );
 }

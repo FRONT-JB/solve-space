@@ -1,12 +1,12 @@
 "use server";
 
-import { createSupabaseServer } from "./server";
+import { supabaseServer } from "./server";
 import { Provider } from "@supabase/supabase-js";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 
 export const signInWith = async (provider: Provider) => {
-  const supabase = await createSupabaseServer();
+  const supabase = await supabaseServer();
 
   const auth_callback_url = `${process.env.NEXT_PUBLIC_SITE_URL}/auth/callback`;
 
@@ -29,7 +29,7 @@ export const signInWith = async (provider: Provider) => {
 export const signInWithGithub = async () => signInWith("github");
 
 export const signOut = async () => {
-  const supabase = await createSupabaseServer();
+  const supabase = await supabaseServer();
   await supabase.auth.signOut();
   revalidatePath("/");
 };

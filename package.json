@@ -7,7 +7,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "commit": "cz"
+    "commit": "cz",
+    "gen": "npx supabase gen types typescript --project-id \"fgntrsnsmwgmfvdgeyau\" --schema public > types/supabase.ts"
   },
   "dependencies": {
     "@monaco-editor/react": "^4.6.0",

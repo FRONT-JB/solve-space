@@ -9,18 +9,62 @@ export type Json =
 export type Database = {
   public: {
     Tables: {
-      countries: {
+      comments: {
         Row: {
-          id: number
-          name: string
+          content: string
+          created_at: string
+          id: string
+          snippet_id: string
+          updated_at: string
+          user_id: string
         }
         Insert: {
-          id?: never
-          name: string
+          content: string
+          created_at?: string
+          id?: string
+          snippet_id: string
+          updated_at?: string
+          user_id: string
         }
         Update: {
-          id?: never
-          name?: string
+          content?: string
+          created_at?: string
+          id?: string
+          snippet_id?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "comments_snippet_id_fkey"
+            columns: ["snippet_id"]
+            isOneToOne: false
+            referencedRelation: "snippets"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      snippets: {
+        Row: {
+          content: string
+          created_at: string
+          id: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          content: string
+          created_at?: string
+          id?: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          content?: string
+          created_at?: string
+          id?: string
+          updated_at?: string
+          user_id?: string
         }
         Relationships: []
       }

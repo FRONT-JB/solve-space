@@ -1,4 +1,4 @@
-import { createSupabaseServer } from "@/app/lib";
+import { supabaseServer } from "@/app/lib/supabase/server";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function GET(request: NextRequest) {
@@ -10,7 +10,7 @@ export async function GET(request: NextRequest) {
 
   if (code) {
     // 인증 코드를 사용하여 세션을 교환한다.
-    const supabase = await createSupabaseServer();
+    const supabase = await supabaseServer();
     const { error } = await supabase.auth.exchangeCodeForSession(code);
 
     if (!error) {
