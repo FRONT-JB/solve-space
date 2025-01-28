@@ -13,24 +13,24 @@ export type Database = {
         Row: {
           content: string
           created_at: string
-          id: string
-          snippet_id: string
+          id: number
+          snippet_id: number
           updated_at: string
           user_id: string
         }
         Insert: {
           content: string
           created_at?: string
-          id?: string
-          snippet_id: string
+          id?: number
+          snippet_id: number
           updated_at?: string
           user_id: string
         }
         Update: {
           content?: string
           created_at?: string
-          id?: string
-          snippet_id?: string
+          id?: number
+          snippet_id?: number
           updated_at?: string
           user_id?: string
         }
@@ -48,21 +48,21 @@ export type Database = {
         Row: {
           content: string
           created_at: string
-          id: string
+          id: number
           updated_at: string
           user_id: string
         }
         Insert: {
           content: string
           created_at?: string
-          id?: string
+          id?: number
           updated_at?: string
           user_id: string
         }
         Update: {
           content?: string
           created_at?: string
-          id?: string
+          id?: number
           updated_at?: string
           user_id?: string
         }
