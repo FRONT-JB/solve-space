@@ -263,7 +263,15 @@ const SidebarTrigger = React.forwardRef<
   React.ElementRef<typeof Button>,
   React.ComponentProps<typeof Button>
 >(({ className, onClick, ...props }, ref) => {
-  const { toggleSidebar, open } = useSidebar();
+  const { toggleSidebar, open, isMobile, openMobile } = useSidebar();
+
+  const label = (() => {
+    if (isMobile) {
+      return openMobile ? "Close Sidebar" : "Open Sidebar";
+    }
+
+    return open ? "Close Sidebar" : "Open Sidebar";
+  })();
 
   return (
     <Button
@@ -280,7 +288,7 @@ const SidebarTrigger = React.forwardRef<
     >
       {open ? <PanelRightOpen /> : <PanelLeftOpen />}
 
-      <span>{open ? "Close Sidebar" : "Open Sidebar"}</span>
+      <span className="text-gray-700 dark:text-gray-400">{label}</span>
     </Button>
   );
 });

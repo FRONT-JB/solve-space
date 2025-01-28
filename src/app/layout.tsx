@@ -55,8 +55,8 @@ export default async function RootLayout({
               userIdentities={userIdentities}
             />
 
-            <div className="h-full w-full mx-auto p-4">
-              <SidebarTrigger />
+            <div className="h-screen w-full p-4">
+              <SidebarTrigger className="p-0" />
 
               {children}
             </div>

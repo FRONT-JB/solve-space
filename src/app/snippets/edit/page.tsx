@@ -142,7 +142,7 @@ export default function SnippetsPage() {
   }, [runCode]);
 
   return (
-    <div className="flex flex-col gap-4 h-[calc(100%-24px)] ">
+    <div className="flex flex-col gap-4 h-[calc(100%-32px)]">
       <ResizablePanelGroup direction="vertical">
         <ResizablePanel defaultSize={60}>
           <Editor onChange={handleChange} onMount={handleEditorMount} />
