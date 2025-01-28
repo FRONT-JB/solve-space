@@ -1,8 +1,11 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import { ThemeProvider } from "@/providers";
-import ThemeToggle from "./snippets/ui/ThemeToggle";
 import "./globals.css";
+import { supabaseServer } from "./lib/supabase/server";
+
+import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
+import { Sidebar } from "./_components";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -20,11 +23,22 @@ export const metadata: Metadata = {
   description: "문제를 풀어보는 공간",
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
+  snippets: React.ReactNode;
 }>) {
+  const supabase = await supabaseServer();
+
+  const session = await supabase.auth.getUser();
+
+  const hasLoggedIn = session.data.user !== null;
+
+  const userIdentities = session.data.user?.identities;
+
+  console.log(session);
+
   return (
     <html lang="ko" className="h-full" suppressHydrationWarning>
       <body
@@ -37,9 +51,18 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <div className="h-full max-w-[1420px] mx-auto p-4">{children}</div>
+          <SidebarProvider>
+            <Sidebar
+              hasLoggedIn={hasLoggedIn}
+              userIdentities={userIdentities}
+            />
 
-          <ThemeToggle />
+            <div className="h-full w-full mx-auto p-4">
+              <SidebarTrigger />
+
+              {children}
+            </div>
+          </SidebarProvider>
         </ThemeProvider>
       </body>
     </html>

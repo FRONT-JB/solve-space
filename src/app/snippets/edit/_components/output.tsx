@@ -1,5 +1,5 @@
 import { AlertTriangle, CheckCircle, Clock } from "lucide-react";
-import OutputSkeleton from "./OutputSkeleton";
+import OutputSkeleton from "./output-skeleton";
 
 interface Props {
   isRunning: boolean;
