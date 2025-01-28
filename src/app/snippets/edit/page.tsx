@@ -7,7 +7,7 @@ import {
 } from "@/components/ui/resizable";
 import { useCallback, useEffect, useState } from "react";
 import { Monaco } from "@monaco-editor/react";
-import { LANGUAGE_CONFIG } from "./constants";
+import { LANGUAGE_CONFIG } from "./_constants";
 import { Editor, Output } from "./_components";
 
 export default function SnippetsPage() {

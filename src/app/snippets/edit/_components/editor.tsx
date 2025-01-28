@@ -1,5 +1,5 @@
 import { Monaco, Editor as MonacoEditor } from "@monaco-editor/react";
-import { defineMonacoThemes, LANGUAGE_CONFIG } from "../constants";
+import { defineMonacoThemes, LANGUAGE_CONFIG } from "../_constants";
 
 export default function Editor({
   onChange,
