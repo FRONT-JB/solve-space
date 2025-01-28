@@ -37,8 +37,6 @@ export default async function RootLayout({
 
   const userIdentities = session.data.user?.identities;
 
-  console.log(session);
-
   return (
     <html lang="ko" className="h-full" suppressHydrationWarning>
       <body
