@@ -104,9 +104,7 @@ export default function Sidebar({
                 side="top"
                 className="w-[--radix-popper-anchor-width]"
               >
-                <DropdownMenuItem disabled={!hasLoggedIn}>
-                  Profile
-                </DropdownMenuItem>
+                <DropdownMenuItem disabled>Profile</DropdownMenuItem>
 
                 <DropdownMenuSeparator />
 
