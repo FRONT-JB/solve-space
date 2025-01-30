@@ -1,7 +1,9 @@
 import Image from "next/image";
 import { getSnippetById } from "../action";
-import { Snippet } from "../edit/_types";
-import { INITIAL_AVARTAR_URL } from "./constants";
+
+import { INITIAL_AVARTAR_URL } from "./_constants";
+import { CopyButton } from "./_components";
+import { Snippet } from "../../../../types";
 
 export default async function SnippetDetail({
   params,
@@ -20,9 +22,13 @@ export default async function SnippetDetail({
   return (
     <div className="space-y-4 py-4">
       <div className="flex items-start justify-between">
-        <p className="text-2xl font-bold dark:text-white text-slate-800 cursor-default">
-          {snippet.title}
-        </p>
+        <div className="flex items-center gap-2">
+          <p className="text-2xl font-bold dark:text-white text-slate-800 cursor-default">
+            {snippet.title}
+          </p>
+
+          <CopyButton content={snippet.content} />
+        </div>
 
         <div className="flex flex-col items-end gap-2">
           <span className="text-sm text-gray-500 dark:text-gray-400 cursor-default">
@@ -45,7 +51,11 @@ export default async function SnippetDetail({
         </div>
       </div>
 
-      <pre>{snippet.content}</pre>
+      <div className="relative bg-slate-950 rounded-xl overflow-hidden ring-1 ring-white/[0.05] font-mono text-sm">
+        <pre className="p-4 overflow-auto">
+          <code className="text-white/80">{snippet.content}</code>
+        </pre>
+      </div>
     </div>
   );
 }

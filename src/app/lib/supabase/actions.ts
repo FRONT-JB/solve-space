@@ -17,8 +17,6 @@ export const signInWith = async (provider: Provider) => {
     },
   });
 
-  console.log(data);
-
   if (error) {
     console.log(error);
   }

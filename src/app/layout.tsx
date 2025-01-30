@@ -6,6 +6,7 @@ import { supabaseServer } from "./lib/supabase/server";
 
 import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
 import { Sidebar } from "./_components";
+import { Toaster } from "@/components/ui/sonner";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -62,6 +63,8 @@ export default async function RootLayout({
             </div>
           </SidebarProvider>
         </ThemeProvider>
+
+        <Toaster />
       </body>
     </html>
   );

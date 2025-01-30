@@ -1,5 +1,3 @@
-export interface Theme {
-  id: string;
-  label: string;
-  color: string;
-}
+export * from "./snippets";
+export * from "./supabase";
+export * from "./theme";

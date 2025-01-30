@@ -1,4 +1,4 @@
-import { Database } from "../../../../../types/supabase";
+import { Database } from "./supabase";
 
 type Snippet = Database["public"]["Tables"]["snippets"]["Row"];
 
