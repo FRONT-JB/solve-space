@@ -10,6 +10,9 @@ import { Monaco } from "@monaco-editor/react";
 import { LANGUAGE_CONFIG } from "./_constants";
 import { Editor, Output } from "./_components";
 
+const EDITOR_DEFAULT_SIZE = 60;
+const OUTPUT_DEFAULT_SIZE = 40;
+
 export default function SnippetsPage() {
   const [value, setValue] = useState("");
   const [isRunning, setIsRunning] = useState(false);
@@ -144,13 +147,13 @@ export default function SnippetsPage() {
   return (
     <div className="flex flex-col gap-4 h-[calc(100%-32px)]">
       <ResizablePanelGroup direction="vertical">
-        <ResizablePanel defaultSize={60}>
+        <ResizablePanel defaultSize={EDITOR_DEFAULT_SIZE}>
           <Editor onChange={handleChange} onMount={handleEditorMount} />
         </ResizablePanel>
 
         <ResizableHandle withHandle />
 
-        <ResizablePanel defaultSize={40}>
+        <ResizablePanel defaultSize={OUTPUT_DEFAULT_SIZE}>
           <Output isRunning={isRunning} output={output} error={error} />
         </ResizablePanel>
       </ResizablePanelGroup>

@@ -4,6 +4,11 @@ import { getSnippetById } from "../action";
 import { INITIAL_AVARTAR_URL } from "./_constants";
 import { CopyButton } from "./_components";
 import { Snippet } from "../../../../types";
+import {
+  AVARTAR_SIZE,
+  DATE_LOCALE,
+  DATE_TO_STRING_OPTIONS,
+} from "@/app/_constants";
 
 export default async function SnippetDetail({
   params,
@@ -28,13 +33,10 @@ export default async function SnippetDetail({
 
         <div className="flex md:flex-col items-end self-end gap-2">
           <span className="text-sm text-gray-500 dark:text-gray-400 cursor-default">
-            {new Date(snippet.created_at).toLocaleDateString("ko-KR", {
-              year: "numeric",
-              month: "numeric",
-              day: "numeric",
-              hour: "numeric",
-              minute: "numeric",
-            })}
+            {new Date(snippet.created_at).toLocaleDateString(
+              DATE_LOCALE,
+              DATE_TO_STRING_OPTIONS
+            )}
           </span>
 
           <div className="flex items-start gap-2">
@@ -45,8 +47,8 @@ export default async function SnippetDetail({
             <Image
               src={snippet.avatar_url || INITIAL_AVARTAR_URL}
               alt="user avatar"
-              width={20}
-              height={20}
+              width={AVARTAR_SIZE}
+              height={AVARTAR_SIZE}
               className="rounded-full"
             />
           </div>

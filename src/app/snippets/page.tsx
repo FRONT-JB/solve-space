@@ -5,6 +5,11 @@ import { AnimatePresence, motion } from "framer-motion";
 import { Clock, Plus, User } from "lucide-react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
+import {
+  CODE_LANGUAGE_LOGO_SIZE,
+  DATE_LOCALE,
+  DATE_TO_STRING_OPTIONS,
+} from "../_constants";
 
 export default function Home() {
   const { push } = useRouter();
@@ -70,8 +75,8 @@ export default function Home() {
                             src="/javascript.png"
                             alt="javascript logo"
                             className="w-6 h-6 object-contain relative z-10"
-                            width={24}
-                            height={24}
+                            width={CODE_LANGUAGE_LOGO_SIZE}
+                            height={CODE_LANGUAGE_LOGO_SIZE}
                           />
                         </div>
                       </div>
@@ -95,13 +100,10 @@ export default function Home() {
                           </div>
 
                           <span className="dark:text-white text-slate-800">
-                            {new Date().toLocaleDateString("ko-KR", {
-                              year: "numeric",
-                              month: "numeric",
-                              day: "numeric",
-                              hour: "numeric",
-                              minute: "numeric",
-                            })}
+                            {new Date().toLocaleDateString(
+                              DATE_LOCALE,
+                              DATE_TO_STRING_OPTIONS
+                            )}
                           </span>
                         </div>
                       </div>
