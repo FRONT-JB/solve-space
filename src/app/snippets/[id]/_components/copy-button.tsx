@@ -4,11 +4,17 @@ import { Button } from "@/components/ui/button";
 import { ClipboardCheck, ClipboardPen } from "lucide-react";
 import { toast } from "sonner";
 
-export default function CopyButton({ content }: { content: string }) {
+interface Props {
+  content: string;
+  className?: string;
+}
+
+export default function CopyButton({ content, className }: Props) {
   return (
     <Button
       size="icon"
-      variant="outline"
+      variant="secondary"
+      className={className}
       onClick={() => {
         navigator.clipboard.writeText(content).then(() =>
           toast("클립보드에 복사되었습니다!", {
