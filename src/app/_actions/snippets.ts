@@ -2,6 +2,19 @@
 
 import { supabaseClient } from "../lib/supabase/client";
 
+export async function getSnippets() {
+  const { data: snippets, error: snippetsError } = await supabaseClient
+    .from("snippets")
+    .select("*")
+    .order("created_at", { ascending: false });
+
+  if (snippetsError) {
+    throw new Error(snippetsError.message);
+  }
+
+  return snippets;
+}
+
 export async function getSnippetById(snippetId: string) {
   const { data: snippetById, error: snippetError } = await supabaseClient
     .from("snippets")

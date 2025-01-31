@@ -1,5 +1,4 @@
 import Image from "next/image";
-import { getSnippetById } from "../action";
 
 import { INITIAL_AVARTAR_URL } from "./_constants";
 import { CopyButton } from "./_components";
@@ -9,6 +8,7 @@ import {
   DATE_LOCALE,
   DATE_TO_STRING_OPTIONS,
 } from "@/app/_constants";
+import { getSnippetById } from "@/app/_actions";
 
 export default async function SnippetDetail({
   params,
