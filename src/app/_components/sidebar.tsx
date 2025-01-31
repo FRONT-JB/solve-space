@@ -11,7 +11,7 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from "@/components/ui/sidebar";
-import { ChevronUp, Code2, Home } from "lucide-react";
+import { AlertTriangle, ChevronUp, Code2, Home } from "lucide-react";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -29,6 +29,8 @@ import { useTheme } from "next-themes";
 import { signInWithGithub, signOut } from "../lib";
 import { UserIdentity } from "@supabase/supabase-js";
 import Image from "next/image";
+import { toast } from "sonner";
+import { TOAST_DURATION } from "../_constants";
 
 // Menu items.
 const items = [
@@ -132,7 +134,21 @@ export default function Sidebar({
                 )}
 
                 {!hasLoggedIn && (
-                  <DropdownMenuItem onClick={signInWithGithub}>
+                  <DropdownMenuItem
+                    onClick={() => {
+                      if (process.env.NODE_ENV === "production") {
+                        toast("로그인 기능은 현재 개발중이에요!", {
+                          description: "빠르게 완성할게요!",
+                          duration: TOAST_DURATION,
+                          icon: <AlertTriangle className="size-5" />,
+                        });
+
+                        return;
+                      }
+
+                      signInWithGithub();
+                    }}
+                  >
                     Log in
                   </DropdownMenuItem>
                 )}
