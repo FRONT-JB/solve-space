@@ -9,6 +9,7 @@ import {
   DATE_TO_STRING_OPTIONS,
 } from "@/app/_constants";
 import { getSnippetById } from "@/app/_actions";
+import PreviousButton from "./_components/previous-button";
 
 export default async function SnippetDetail({
   params,
@@ -27,11 +28,15 @@ export default async function SnippetDetail({
   return (
     <div className="space-y-4 py-4">
       <div className="flex items-start justify-between gap-4 flex-col md:flex-row">
-        <p className="text-2xl font-bold dark:text-white text-slate-800 cursor-default md:max-w-sm line-clamp-1">
-          {snippet.title}
-        </p>
+        <div className="flex items-center gap-2">
+          <PreviousButton />
 
-        <div className="flex md:flex-col items-end self-end gap-2">
+          <p className="text-2xl font-bold dark:text-white text-slate-800 cursor-default md:max-w-sm line-clamp-1">
+            {snippet.title}
+          </p>
+        </div>
+
+        <div className="flex md:flex-col items-end md:self-end gap-2">
           <span className="text-sm text-gray-500 dark:text-gray-400 cursor-default">
             {new Date(snippet.created_at).toLocaleDateString(
               DATE_LOCALE,
