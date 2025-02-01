@@ -9,6 +9,7 @@ import { useCallback, useEffect, useState } from "react";
 import { Monaco } from "@monaco-editor/react";
 import { LANGUAGE_CONFIG } from "./_constants";
 import { Editor, Output } from "./_components";
+import CreateSnippets from "./_components/create-snippets";
 
 const EDITOR_DEFAULT_SIZE = 60;
 const OUTPUT_DEFAULT_SIZE = 40;
@@ -146,7 +147,9 @@ export default function SnippetsPage() {
 
   return (
     <div className="flex flex-col gap-4 h-[calc(100%-32px)]">
-      <ResizablePanelGroup direction="vertical">
+      <CreateSnippets />
+
+      <ResizablePanelGroup className="w-full" direction="vertical">
         <ResizablePanel defaultSize={EDITOR_DEFAULT_SIZE}>
           <Editor onChange={handleChange} onMount={handleEditorMount} />
         </ResizablePanel>
