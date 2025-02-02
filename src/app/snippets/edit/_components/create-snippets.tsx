@@ -5,7 +5,6 @@ import {
   Drawer,
   DrawerClose,
   DrawerContent,
-  DrawerDescription,
   DrawerFooter,
   DrawerHeader,
   DrawerTitle,
@@ -31,13 +30,18 @@ export default function CreateSnippets() {
           <div className="max-w-md w-full mx-auto h-96 flex flex-col justify-between">
             <DrawerHeader className="p-0 py-4 px-2 text-left">
               <DrawerTitle>Are you absolutely sure?</DrawerTitle>
-
-              <DrawerDescription>
-                This action cannot be undone.
-              </DrawerDescription>
             </DrawerHeader>
 
-            <div className="flex-1 px-2">
+            <div className="flex-1 px-2 space-y-4">
+              <div className="flex flex-col gap-2">
+                <Label htmlFor="link">Algorithm Link</Label>
+                <Input
+                  id="link"
+                  autoComplete="off"
+                  placeholder="Algorithm Link"
+                />
+              </div>
+
               <div className="flex flex-col gap-2">
                 <Label htmlFor="name">Snippet name</Label>
                 <Input
