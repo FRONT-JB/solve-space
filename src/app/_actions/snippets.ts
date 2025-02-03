@@ -33,3 +33,37 @@ export async function getSnippetById(snippetId: string) {
 
   return snippetById;
 }
+
+export async function createSnippet({
+  title,
+  content,
+  username,
+  avatar_url,
+}: {
+  title: string;
+  content: string;
+  username?: string | null;
+  avatar_url?: string | null;
+}) {
+  try {
+    const { data, error } = await supabaseClient
+      .from("snippets")
+      .insert({
+        title,
+        content,
+        username,
+        avatar_url,
+      })
+      .select()
+      .single();
+
+    if (error) {
+      throw error;
+    }
+
+    return data;
+  } catch (error) {
+    console.error("Error creating snippet:", error);
+    throw error;
+  }
+}
