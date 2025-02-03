@@ -8,8 +8,7 @@ import {
 import { useCallback, useEffect, useState } from "react";
 import { Monaco } from "@monaco-editor/react";
 import { LANGUAGE_CONFIG } from "./_constants";
-import { Editor, Output } from "./_components";
-import CreateSnippets from "./_components/create-snippets";
+import { CreateSnippets, Editor, Output } from "./_components";
 
 const EDITOR_DEFAULT_SIZE = 60;
 const OUTPUT_DEFAULT_SIZE = 40;

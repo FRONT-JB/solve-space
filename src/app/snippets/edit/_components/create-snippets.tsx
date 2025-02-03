@@ -41,7 +41,6 @@ export default function CreateSnippets() {
                   placeholder="Algorithm Link"
                 />
               </div>
-
               <div className="flex flex-col gap-2">
                 <Label htmlFor="name">Snippet name</Label>
                 <Input
