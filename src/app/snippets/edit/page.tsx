@@ -146,7 +146,7 @@ export default function SnippetsPage() {
 
   return (
     <div className="flex flex-col gap-4 h-[calc(100%-32px)]">
-      <CreateSnippets />
+      <CreateSnippets value={value} />
 
       <ResizablePanelGroup className="w-full" direction="vertical">
         <ResizablePanel defaultSize={EDITOR_DEFAULT_SIZE}>

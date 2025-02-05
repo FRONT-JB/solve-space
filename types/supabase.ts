@@ -42,33 +42,72 @@ export type Database = {
             referencedRelation: "snippets"
             referencedColumns: ["id"]
           },
+          {
+            foreignKeyName: "comments_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "users"
+            referencedColumns: ["id"]
+          },
         ]
       }
       snippets: {
         Row: {
-          avatar_url: string | null
           content: string
           created_at: string
           id: number
+          link: string | null
           title: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          content: string
+          created_at?: string
+          id?: number
+          link?: string | null
+          title: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          content?: string
+          created_at?: string
+          id?: number
+          link?: string | null
+          title?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "snippets_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "users"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      users: {
+        Row: {
+          avatar_url: string | null
+          created_at: string
+          id: string
           updated_at: string
           username: string | null
         }
         Insert: {
           avatar_url?: string | null
-          content: string
           created_at?: string
-          id?: number
-          title?: string
+          id: string
           updated_at?: string
           username?: string | null
         }
         Update: {
           avatar_url?: string | null
-          content?: string
           created_at?: string
-          id?: number
-          title?: string
+          id?: string
           updated_at?: string
           username?: string | null
         }

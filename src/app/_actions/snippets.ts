@@ -1,12 +1,16 @@
 "use server";
 
+import { redirect } from "next/navigation";
 import { supabaseClient } from "../lib/supabase/client";
+import { supabaseServer } from "../lib/supabase/server";
+import { revalidatePath } from "next/cache";
 
 export async function getSnippets() {
-  const { data: snippets, error: snippetsError } = await supabaseClient
+  const supabase = await supabaseServer();
+
+  const { data: snippets, error: snippetsError } = await supabase
     .from("snippets")
-    .select("*")
-    .order("created_at", { ascending: false });
+    .select("*");
 
   if (snippetsError) {
     throw new Error(snippetsError.message);
@@ -35,29 +39,52 @@ export async function getSnippetById(snippetId: string) {
 }
 
 export async function createSnippet({
+  link,
   title,
   content,
-  username,
-  avatar_url,
 }: {
+  link: string;
   title: string;
   content: string;
-  username?: string | null;
-  avatar_url?: string | null;
 }) {
+  const supabase = await supabaseServer();
+
+  // 현재 인증된 사용자 정보 가져오기
+  const {
+    data: { user },
+    error: userError,
+  } = await supabase.auth.getUser();
+
+  if (userError || !user) {
+    throw new Error("User not authenticated");
+  }
+
   try {
-    const { data, error } = await supabaseClient
+    // 먼저 users 테이블에서 사용자 확인
+    const { error: userDbError } = await supabase
+      .from("users")
+      .select("id")
+      .eq("id", user.id)
+      .single();
+
+    if (userDbError) {
+      throw new Error("User not found in database");
+    }
+
+    // snippet 생성
+    const { data, error } = await supabase
       .from("snippets")
       .insert({
         title,
         content,
-        username,
-        avatar_url,
+        link,
+        user_id: user.id, // 현재 인증된 사용자의 ID
       })
       .select()
       .single();
 
     if (error) {
+      console.error("Supabase error:", error);
       throw error;
     }
 
@@ -65,5 +92,8 @@ export async function createSnippet({
   } catch (error) {
     console.error("Error creating snippet:", error);
     throw error;
+  } finally {
+    revalidatePath("/snippets");
+    redirect("/snippets");
   }
 }

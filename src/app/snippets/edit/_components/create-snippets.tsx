@@ -1,5 +1,6 @@
 "use client";
 
+import { createSnippet } from "@/app/_actions";
 import { Button } from "@/components/ui/button";
 import {
   Drawer,
@@ -14,7 +15,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Plus } from "lucide-react";
 
-export default function CreateSnippets() {
+export default function CreateSnippets({ value }: { value: string }) {
   return (
     <div className="flex justify-between items-center">
       <h2 className="text-lg font-bold">Create Snippet</h2>
@@ -29,37 +30,53 @@ export default function CreateSnippets() {
         <DrawerContent>
           <div className="max-w-md w-full mx-auto h-96 flex flex-col justify-between">
             <DrawerHeader className="p-0 py-4 px-2 text-left">
-              <DrawerTitle>Are you absolutely sure?</DrawerTitle>
+              <DrawerTitle>Create Snippet</DrawerTitle>
             </DrawerHeader>
 
-            <div className="flex-1 px-2 space-y-4">
-              <div className="flex flex-col gap-2">
+            <form
+              action={async (formData) => {
+                await createSnippet({
+                  link: formData.get("link") as string,
+                  title: formData.get("title") as string,
+                  content: value,
+                });
+              }}
+              className="flex-1 px-2 space-y-4"
+            >
+              <fieldset className="flex flex-col gap-2">
                 <Label htmlFor="link">Algorithm Link</Label>
+
                 <Input
                   id="link"
+                  name="link"
                   autoComplete="off"
                   placeholder="Algorithm Link"
                 />
-              </div>
-              <div className="flex flex-col gap-2">
-                <Label htmlFor="name">Snippet name</Label>
+              </fieldset>
+
+              <fieldset className="flex flex-col gap-2">
+                <Label htmlFor="title">Snippet Title</Label>
+
                 <Input
-                  id="name"
+                  id="title"
+                  name="title"
                   autoComplete="off"
-                  placeholder="Snippet name"
+                  placeholder="Snippet Title"
                 />
-              </div>
-            </div>
+              </fieldset>
 
-            <DrawerFooter className="flex flex-row gap-2 p-0 py-4 px-2">
-              <Button className="flex-1">Create</Button>
+              <fieldset>
+                <DrawerFooter className="flex flex-row gap-2 p-0 py-4 px-2">
+                  <Button className="flex-1">Create</Button>
 
-              <DrawerClose asChild>
-                <Button variant="outline" className="flex-1">
-                  Cancel
-                </Button>
-              </DrawerClose>
-            </DrawerFooter>
+                  <DrawerClose asChild>
+                    <Button variant="outline" className="flex-1">
+                      Cancel
+                    </Button>
+                  </DrawerClose>
+                </DrawerFooter>
+              </fieldset>
+            </form>
           </div>
         </DrawerContent>
       </Drawer>

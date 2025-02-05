@@ -10,9 +10,28 @@ import {
   DATE_LOCALE,
   DATE_TO_STRING_OPTIONS,
 } from "../_constants";
+import { useEffect, useState } from "react";
+import { Snippet } from "../../../types";
+import { getSnippets } from "../_actions";
 
 export default function Home() {
   const { push } = useRouter();
+  const [snippets, setSnippets] = useState<Snippet[]>([]);
+
+  useEffect(() => {
+    const fetchSnippets = async () => {
+      try {
+        const data = await getSnippets();
+        setSnippets(data);
+      } catch (error) {
+        console.error("Error fetching snippets:", error);
+      }
+    };
+
+    fetchSnippets();
+  }, []);
+
+  console.log(snippets);
 
   return (
     <div className="flex flex-col gap-3 pt-2">
