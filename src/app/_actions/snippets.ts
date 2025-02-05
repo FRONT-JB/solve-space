@@ -1,7 +1,6 @@
 "use server";
 
 import { redirect } from "next/navigation";
-import { supabaseClient } from "../lib/supabase/client";
 import { supabaseServer } from "../lib/supabase/server";
 import { revalidatePath } from "next/cache";
 
@@ -20,7 +19,9 @@ export async function getSnippets() {
 }
 
 export async function getSnippetById(snippetId: string) {
-  const { data: snippetById, error: snippetError } = await supabaseClient
+  const supabase = await supabaseServer();
+
+  const { data: snippetById, error: snippetError } = await supabase
     .from("snippets")
     .select("*")
     .eq("id", parseInt(snippetId)) // 문자열을 숫자로 변환
