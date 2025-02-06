@@ -1,7 +1,7 @@
-"use client";
+'use client';
 
-import { createSnippet } from "@/app/_actions";
-import { Button } from "@/components/ui/button";
+import { createSnippet } from '@/app/_actions';
+import { Button } from '@/components/ui/button';
 import {
   Drawer,
   DrawerClose,
@@ -10,10 +10,10 @@ import {
   DrawerHeader,
   DrawerTitle,
   DrawerTrigger,
-} from "@/components/ui/drawer";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { Plus } from "lucide-react";
+} from '@/components/ui/drawer';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import { Plus } from 'lucide-react';
 
 export default function CreateSnippets({ value }: { value: string }) {
   return (
@@ -34,10 +34,10 @@ export default function CreateSnippets({ value }: { value: string }) {
             </DrawerHeader>
 
             <form
-              action={async (formData) => {
+              action={async formData => {
                 await createSnippet({
-                  link: formData.get("link") as string,
-                  title: formData.get("title") as string,
+                  link: formData.get('link') as string,
+                  title: formData.get('title') as string,
                   content: value,
                 });
               }}
@@ -46,23 +46,13 @@ export default function CreateSnippets({ value }: { value: string }) {
               <fieldset className="flex flex-col gap-2">
                 <Label htmlFor="link">Algorithm Link</Label>
 
-                <Input
-                  id="link"
-                  name="link"
-                  autoComplete="off"
-                  placeholder="Algorithm Link"
-                />
+                <Input id="link" name="link" autoComplete="off" placeholder="Algorithm Link" />
               </fieldset>
 
               <fieldset className="flex flex-col gap-2">
                 <Label htmlFor="title">Snippet Title</Label>
 
-                <Input
-                  id="title"
-                  name="title"
-                  autoComplete="off"
-                  placeholder="Snippet Title"
-                />
+                <Input id="title" name="title" autoComplete="off" placeholder="Snippet Title" />
               </fieldset>
 
               <fieldset>

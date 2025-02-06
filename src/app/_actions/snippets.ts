@@ -1,15 +1,16 @@
-"use server";
+'use server';
 
-import { redirect } from "next/navigation";
-import { supabaseServer } from "../lib/supabase/server";
-import { revalidatePath } from "next/cache";
+import { redirect } from 'next/navigation';
+import { supabaseServer } from '../lib/supabase/server';
+import { revalidatePath } from 'next/cache';
 
 export async function getSnippets() {
   const supabase = await supabaseServer();
 
   const { data: snippets, error: snippetsError } = await supabase
-    .from("snippets")
-    .select("*");
+    .from('snippets')
+    .select('*')
+    .order('created_at', { ascending: false });
 
   if (snippetsError) {
     throw new Error(snippetsError.message);
@@ -22,14 +23,14 @@ export async function getSnippetById(snippetId: string) {
   const supabase = await supabaseServer();
 
   const { data: snippetById, error: snippetError } = await supabase
-    .from("snippets")
-    .select("*")
-    .eq("id", parseInt(snippetId)) // 문자열을 숫자로 변환
+    .from('snippets')
+    .select('*')
+    .eq('id', parseInt(snippetId)) // 문자열을 숫자로 변환
     .single();
 
   if (snippetError) {
     // 데이터가 없는 경우
-    if (snippetError.code === "PGRST116") {
+    if (snippetError.code === 'PGRST116') {
       return null;
     }
 
@@ -57,24 +58,24 @@ export async function createSnippet({
   } = await supabase.auth.getUser();
 
   if (userError || !user) {
-    throw new Error("User not authenticated");
+    throw new Error('User not authenticated');
   }
 
   try {
     // 먼저 users 테이블에서 사용자 확인
     const { error: userDbError } = await supabase
-      .from("users")
-      .select("id")
-      .eq("id", user.id)
+      .from('users')
+      .select('id')
+      .eq('id', user.id)
       .single();
 
     if (userDbError) {
-      throw new Error("User not found in database");
+      throw new Error('User not found in database');
     }
 
     // snippet 생성
     const { data, error } = await supabase
-      .from("snippets")
+      .from('snippets')
       .insert({
         title,
         content,
@@ -85,16 +86,16 @@ export async function createSnippet({
       .single();
 
     if (error) {
-      console.error("Supabase error:", error);
+      console.error('Supabase error:', error);
       throw error;
     }
 
     return data;
   } catch (error) {
-    console.error("Error creating snippet:", error);
+    console.error('Error creating snippet:', error);
     throw error;
   } finally {
-    revalidatePath("/snippets");
-    redirect("/snippets");
+    revalidatePath('/snippets');
+    redirect('/snippets');
   }
 }

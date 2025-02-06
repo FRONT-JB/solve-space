@@ -1,1 +1,1 @@
-export const INITIAL_AVARTAR_URL = "https://i.pravatar.cc/40";
+export const INITIAL_AVARTAR_URL = 'https://i.pravatar.cc/40';

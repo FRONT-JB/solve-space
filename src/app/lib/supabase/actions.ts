@@ -1,9 +1,9 @@
-"use server";
+'use server';
 
-import { supabaseServer } from "./server";
-import { Provider } from "@supabase/supabase-js";
-import { revalidatePath } from "next/cache";
-import { redirect } from "next/navigation";
+import { supabaseServer } from './server';
+import { Provider } from '@supabase/supabase-js';
+import { revalidatePath } from 'next/cache';
+import { redirect } from 'next/navigation';
 
 export const signInWith = async (provider: Provider) => {
   const supabase = await supabaseServer();
@@ -24,10 +24,10 @@ export const signInWith = async (provider: Provider) => {
   redirect(data.url as string);
 };
 
-export const signInWithGithub = async () => signInWith("github");
+export const signInWithGithub = async () => signInWith('github');
 
 export const signOut = async () => {
   const supabase = await supabaseServer();
   await supabase.auth.signOut();
-  revalidatePath("/");
+  revalidatePath('/');
 };

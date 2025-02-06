@@ -1,27 +1,27 @@
-import type { Metadata } from "next";
-import localFont from "next/font/local";
-import { ThemeProvider } from "@/providers";
-import "./globals.css";
-import { supabaseServer } from "./lib/supabase/server";
+import type { Metadata } from 'next';
+import localFont from 'next/font/local';
+import { ThemeProvider } from '@/providers';
+import './globals.css';
+import { supabaseServer } from './lib/supabase/server';
 
-import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
-import { Sidebar } from "./_components";
-import { Toaster } from "@/components/ui/sonner";
+import { SidebarProvider, SidebarTrigger } from '@/components/ui/sidebar';
+import { Sidebar } from './_components';
+import { Toaster } from '@/components/ui/sonner';
 
 const geistSans = localFont({
-  src: "./fonts/GeistVF.woff",
-  variable: "--font-geist-sans",
-  weight: "100 900",
+  src: './fonts/GeistVF.woff',
+  variable: '--font-geist-sans',
+  weight: '100 900',
 });
 const geistMono = localFont({
-  src: "./fonts/GeistMonoVF.woff",
-  variable: "--font-geist-mono",
-  weight: "100 900",
+  src: './fonts/GeistMonoVF.woff',
+  variable: '--font-geist-mono',
+  weight: '100 900',
 });
 
 export const metadata: Metadata = {
-  title: "Solve Space",
-  description: "문제를 풀어보는 공간",
+  title: 'Solve Space',
+  description: '문제를 풀어보는 공간',
 };
 
 export default async function RootLayout({
@@ -51,10 +51,7 @@ export default async function RootLayout({
           disableTransitionOnChange
         >
           <SidebarProvider>
-            <Sidebar
-              hasLoggedIn={hasLoggedIn}
-              userIdentities={userIdentities}
-            />
+            <Sidebar hasLoggedIn={hasLoggedIn} userIdentities={userIdentities} />
 
             <div className="h-screen w-full p-4">
               <SidebarTrigger className="p-0" />

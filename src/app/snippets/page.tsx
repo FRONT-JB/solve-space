@@ -1,18 +1,14 @@
-"use client";
+'use client';
 
-import { Button } from "@/components/ui/button";
-import { AnimatePresence, motion } from "framer-motion";
-import { Clock, Plus, User } from "lucide-react";
-import Image from "next/image";
-import { useRouter } from "next/navigation";
-import {
-  CODE_LANGUAGE_LOGO_SIZE,
-  DATE_LOCALE,
-  DATE_TO_STRING_OPTIONS,
-} from "../_constants";
-import { useEffect, useState } from "react";
-import { Snippet } from "../../../types";
-import { getSnippets } from "../_actions";
+import { Button } from '@/components/ui/button';
+import { AnimatePresence, motion } from 'framer-motion';
+import { Clock, Plus, User } from 'lucide-react';
+import Image from 'next/image';
+import { useRouter } from 'next/navigation';
+import { CODE_LANGUAGE_LOGO_SIZE, DATE_LOCALE, DATE_TO_STRING_OPTIONS } from '../_constants';
+import { useEffect, useState } from 'react';
+import { Snippet } from '../../../types';
+import { getSnippets } from '../_actions';
 
 export default function Home() {
   const { push } = useRouter();
@@ -24,7 +20,7 @@ export default function Home() {
         const data = await getSnippets();
         setSnippets(data);
       } catch (error) {
-        console.error("Error fetching snippets:", error);
+        console.error('Error fetching snippets:', error);
       }
     };
 
@@ -41,15 +37,9 @@ export default function Home() {
         transition={{ delay: 0.1 }}
         className="flex items-center justify-between"
       >
-        <h1 className="text-2xl font-bold dark:text-white text-slate-800">
-          Snippets
-        </h1>
+        <h1 className="text-2xl font-bold dark:text-white text-slate-800">Snippets</h1>
 
-        <Button
-          size="icon"
-          variant="outline"
-          onClick={() => push("/snippets/edit")}
-        >
+        <Button size="icon" variant="outline" onClick={() => push('/snippets/edit')}>
           <Plus className="size-4" />
         </Button>
       </motion.div>
@@ -62,7 +52,7 @@ export default function Home() {
         layout
       >
         <AnimatePresence mode="popLayout">
-          {[1].map((snippet) => (
+          {[1].map(snippet => (
             <motion.div
               key={snippet}
               layout
@@ -119,10 +109,7 @@ export default function Home() {
                           </div>
 
                           <span className="dark:text-white text-slate-800">
-                            {new Date().toLocaleDateString(
-                              DATE_LOCALE,
-                              DATE_TO_STRING_OPTIONS
-                            )}
+                            {new Date().toLocaleDateString(DATE_LOCALE, DATE_TO_STRING_OPTIONS)}
                           </span>
                         </div>
                       </div>

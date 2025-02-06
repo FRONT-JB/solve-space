@@ -1,5 +1,5 @@
-import { Monaco, Editor as MonacoEditor } from "@monaco-editor/react";
-import { defineMonacoThemes, LANGUAGE_CONFIG } from "../_constants";
+import { Monaco, Editor as MonacoEditor } from '@monaco-editor/react';
+import { defineMonacoThemes, LANGUAGE_CONFIG } from '../_constants';
 
 export default function Editor({
   onChange,
@@ -23,13 +23,13 @@ export default function Editor({
           automaticLayout: true,
           scrollBeyondLastLine: false,
           padding: { top: 4, bottom: 4 },
-          renderWhitespace: "selection",
+          renderWhitespace: 'selection',
           fontFamily: '"Fira Code", "Cascadia Code", Consolas, monospace',
           fontLigatures: true,
-          cursorBlinking: "smooth",
+          cursorBlinking: 'smooth',
           smoothScrolling: true,
           contextmenu: true,
-          renderLineHighlight: "all",
+          renderLineHighlight: 'all',
           lineHeight: 1.6,
           letterSpacing: 0.5,
           roundedSelection: true,

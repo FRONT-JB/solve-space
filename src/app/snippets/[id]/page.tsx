@@ -1,21 +1,13 @@
-import Image from "next/image";
+import Image from 'next/image';
 
-import { INITIAL_AVARTAR_URL } from "./_constants";
-import { CopyButton } from "./_components";
-import { Snippet } from "../../../../types";
-import {
-  AVARTAR_SIZE,
-  DATE_LOCALE,
-  DATE_TO_STRING_OPTIONS,
-} from "@/app/_constants";
-import { getSnippetById } from "@/app/_actions";
-import PreviousButton from "./_components/previous-button";
+import { INITIAL_AVARTAR_URL } from './_constants';
+import { CopyButton } from './_components';
+import { Snippet } from '../../../../types';
+import { AVARTAR_SIZE, DATE_LOCALE, DATE_TO_STRING_OPTIONS } from '@/app/_constants';
+import { getSnippetById } from '@/app/_actions';
+import PreviousButton from './_components/previous-button';
 
-export default async function SnippetDetail({
-  params,
-}: {
-  params: Promise<{ id: string }>;
-}) {
+export default async function SnippetDetail({ params }: { params: Promise<{ id: string }> }) {
   // 이미 resolved된 값이지만 await을 사용하지 않으면 Nextjs 타입시스템에서 Promise일 것으로 예상해 에러가 발생함
   const { id: snippetId } = await params;
 
@@ -38,10 +30,7 @@ export default async function SnippetDetail({
 
         <div className="flex md:flex-col items-end md:self-end gap-2">
           <span className="text-sm text-gray-500 dark:text-gray-400 cursor-default">
-            {new Date(snippet.created_at).toLocaleDateString(
-              DATE_LOCALE,
-              DATE_TO_STRING_OPTIONS
-            )}
+            {new Date(snippet.created_at).toLocaleDateString(DATE_LOCALE, DATE_TO_STRING_OPTIONS)}
           </span>
 
           <div className="flex items-start gap-2">

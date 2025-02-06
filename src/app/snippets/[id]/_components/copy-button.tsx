@@ -1,9 +1,9 @@
-"use client";
+'use client';
 
-import { TOAST_DURATION } from "@/app/_constants";
-import { Button } from "@/components/ui/button";
-import { ClipboardCheck, ClipboardPen } from "lucide-react";
-import { toast } from "sonner";
+import { TOAST_DURATION } from '@/app/_constants';
+import { Button } from '@/components/ui/button';
+import { ClipboardCheck, ClipboardPen } from 'lucide-react';
+import { toast } from 'sonner';
 
 interface Props {
   content: string;
@@ -18,9 +18,9 @@ export default function CopyButton({ content, className }: Props) {
       className={className}
       onClick={() => {
         navigator.clipboard.writeText(content).then(() =>
-          toast("클립보드에 복사되었습니다!", {
+          toast('클립보드에 복사되었습니다!', {
             duration: TOAST_DURATION,
-            position: "top-right",
+            position: 'top-right',
             icon: <ClipboardCheck className="w-5 h-5" />,
           })
         );
